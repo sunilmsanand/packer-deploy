@@ -6,7 +6,6 @@ pipeline {
                 withCredentials([
                     [
                         $class: 'SecretText',
-                        credentialsId: 'aws_credential',
                         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                     ]
@@ -20,7 +19,6 @@ pipeline {
                 withCredentials([
                     [
                         $class: 'SecretText',
-                        credentialsId: 'aws_credential',
                         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                     ]
