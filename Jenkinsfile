@@ -5,7 +5,7 @@ pipeline {
             steps {
                 withCredentials([
                     [
-                        $class: 'SecretText',
+                        $class: 'Secrettext',
                         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                     ]
@@ -18,7 +18,7 @@ pipeline {
             steps {
                 withCredentials([
                     [
-                        $class: 'SecretText',
+                        $class: 'Secrettext',
                         accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                         secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                     ]
