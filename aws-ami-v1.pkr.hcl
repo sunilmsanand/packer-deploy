@@ -37,7 +37,7 @@ build {
 }
   provisioner "shell" {
   inline = [
-    "sudo yum install -y epel-release",
+    "sudo amazon-linux-extras install epel",
     "sudo yum install -y ansible",
     "ansible --version",
     "ansible-playbook --version",
