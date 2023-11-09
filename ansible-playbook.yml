@@ -39,30 +39,6 @@
       yum:
         name: ansible
         state: present
-
-    - name: Copy provisioner.sh to the target machine
-      copy:
-        src: provisioner.sh
-        dest: /tmp/provisioner.sh
-        mode: 0755
-
-    - name: Ensure provisioner.sh is executable
-      file:
-        path: /tmp/provisioner.sh
-        mode: 0755
-
-    - name: List files in /tmp
-      command: ls -la /tmp
-
-    - name: Print current working directory
-      command: pwd
-
-    - name: Display content of provisioner.sh
-      command: cat /tmp/provisioner.sh
-
-    - name: Execute provisioner.sh with Ansible
-      command: "/bin/bash -x /tmp/provisioner.sh"
-
   handlers:
     - name: Start CloudWatch Agent
       command: "/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a start"

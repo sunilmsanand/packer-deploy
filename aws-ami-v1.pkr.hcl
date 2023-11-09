@@ -36,9 +36,12 @@ build {
   destination = "/tmp/ansible-playbook.yml"
 }
   provisioner "shell" {
-    inline = [
-      "sudo yum install -y ansible",
-      "ansible-playbook -i localhost, /tmp/ansible-playbook.yml"
-    ]
-  }
+  inline = [
+    "sudo yum install -y epel-release",
+    "sudo yum install -y ansible",
+    "ansible --version",
+    "ansible-playbook --version",
+    "ansible-playbook -i localhost, /tmp/ansible-playbook.yml"
+  ]
+}
 }
