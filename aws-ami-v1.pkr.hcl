@@ -37,7 +37,7 @@ build {
 }
   provisioner "shell" {
     inline = [
-      "sudo yum install -y ansible"
+      "sudo yum install -y ansible",
       "ansible-playbook -i localhost, /tmp/ansible-playbook.yml"
     ]
   }
