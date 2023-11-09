@@ -20,11 +20,14 @@
       notify:
         - Start CloudWatch Agent
 
-    - name: Install AWS Inspector
+    - name: Download AWS Inspector RPM
       get_url:
-        url: "https://inspector-agent.amazonaws.com/linux/latest/install"
-        dest: /tmp/install
-      command: "bash /tmp/install"
+        url: "{{ aws_inspector_url }}"
+        dest: "/tmp/aws_inspector.rpm"
+
+    - name: Install AWS Inspector
+      command: 
+        cmd: "sudo yum install -y /tmp/aws_inspector.rpm"
       args:
         creates: /opt/aws/awsagent
 
