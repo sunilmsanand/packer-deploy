@@ -32,27 +32,12 @@ build {
   ]
 
   provisioner "file" {
-  source = "provisioner.sh"
-  destination = "/tmp/provisioner.sh"
+  source = "ansible-playbook.yml"
+  destination = "/tmp/ansible-playbook.yml"
 }
-
   provisioner "shell" {
-    inline = ["chmod a+x /tmp/provisioner.sh"]
-  }
-  
-  provisioner "shell" {
-    inline = [ "ls -la /tmp"]
-  }
-  
-    provisioner "shell" {
-    inline = [ "pwd"]
-  }
-  
-  provisioner "shell" {
-    inline = [ "cat /tmp/provisioner.sh"]
-  }
-
-  provisioner "shell" {
-    inline = ["/bin/bash -x /tmp/provisioner.sh"]
+    inline = [
+      "ansible-playbook -i localhost, /tmp/ansible-playbook.yml"
+    ]
   }
 }

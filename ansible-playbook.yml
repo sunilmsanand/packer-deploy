@@ -35,6 +35,11 @@
       notify:
         - Start Docker
 
+    - name: Install Ansible
+      yum:
+        name: ansible
+        state: present
+
     # Original tasks
     - name: Copy provisioner.sh to the target machine
       copy:
