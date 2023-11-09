@@ -1,0 +1,51 @@
+---
+- hosts: all
+  become: true  # Run tasks with sudo
+  tasks:
+    - name: Update packages
+      yum:
+        name: '*'
+        state: latest
+
+    - name: Install git
+      yum:
+        name: git
+        state: present
+
+    - name: Install Amazon SSM
+      yum:
+        name: "https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/linux_amd64/amazon-ssm-agent.rpm"
+        state: present
+
+    - name: Install Amazon CloudWatch Agent
+      yum:
+        name: "https://s3.amazonaws.com/amazoncloudwatch-agent/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm"
+        state: present
+      notify:
+        - Start CloudWatch Agent
+
+    - name: Install AWS Inspector
+      get_url:
+        url: "https://inspector-agent.amazonaws.com/linux/latest/install"
+        dest: /tmp/install
+      command: "bash /tmp/install"
+      args:
+        creates: /opt/aws/awsagent
+
+    - name: Install Docker
+      yum:
+        name: docker
+        state: present
+      notify:
+        - Start Docker
+
+  handlers:
+    - name: Start CloudWatch Agent
+      command: "/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a start"
+      async: 0
+      poll: 0
+
+    - name: Start Docker
+      systemd:
+        name: docker
+        state: started
